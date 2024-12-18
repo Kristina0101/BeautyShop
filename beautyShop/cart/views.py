@@ -6,10 +6,11 @@ from shop.models import Products
 from .cart import Cart
 from .forms import CartAddProductForm
 
+
 @require_POST
 def cart_add(request, product_id):
     cart = Cart(request)
-    product = get_object_or_404(Products, products_id=product_id)
+    product = get_object_or_404(Products, products_id = product_id)
     
     # Передаем доступное количество в форму
     form = CartAddProductForm(request.POST, max_quantity=product.quantity)
@@ -20,11 +21,13 @@ def cart_add(request, product_id):
                  update_quantity=cd['update'])
     return redirect('cart:cart_detail')
 
+
 def cart_remove(request, product_id):  # Изменено на `product_id`
     cart = Cart(request)
     product = get_object_or_404(Products, products_id=product_id)
     cart.remove(product)
     return redirect('cart:cart_detail')
+
 
 def cart_detail(request):
     cart = Cart(request)

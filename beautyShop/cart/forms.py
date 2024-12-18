@@ -1,5 +1,4 @@
 from django import forms
-from shop.models import Products
 
 
 class CartAddProductForm(forms.Form):

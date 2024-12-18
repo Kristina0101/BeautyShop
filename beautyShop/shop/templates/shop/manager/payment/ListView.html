@@ -1,0 +1,66 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Просмотр оплаты{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_manager.html'%}
+{% endblock %}
+{% block content %}
+<header>
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Заказ</th>
+        <th>Дата оплаты</th>
+        <th>Сумма оплаты</th>
+        <th>Способ оплаты</th>
+        <th>Детали</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for payment in PaymentListView %}
+        <tr>
+          <td>{{ payment.order.user.username }}</td>
+          <td>{{ payment.date_payment }}</td>
+          <td>{{ payment.sum_payment }}</td>
+          <td>{{ payment.payment_method }}</td>
+          <td><a href="{% url 'shop:PaymentDetailView' payment.pk %}">Подробнее</a><br></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+    <div class="up_del_but export_but">
+      <a href="{% url 'shop:export_payments_to_excel' %}">
+        Экспортировать в Excel
+      </a>
+    </div>
+  </table>
+  <nav aria-label="Page navigation" class="pagination-container">
+    <ul class="pagination">
+      {% if PaymentListView.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page=1" aria-label="First">&laquo;&laquo;</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ PaymentListView.previous_page_number }}" aria-label="Previous">&laquo;</a>
+        </li>
+      {% endif %}
+  
+      {% for page in PaymentListView.paginator.page_range %}
+        <li class="page-item{% if PaymentListView.number == page %} active{% endif %}">
+          <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+        </li>
+      {% endfor %}
+  
+      {% if PaymentListView.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ PaymentListView.next_page_number }}" aria-label="Next">&raquo;</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ PaymentListView.paginator.num_pages }}" aria-label="Last">&raquo;&raquo;</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</header>
+
+{% endblock %}

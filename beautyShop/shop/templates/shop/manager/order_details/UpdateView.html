@@ -1,0 +1,36 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Обновление деталей заказа{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_manager.html' %}
+{% endblock %}
+{% block content %}
+<a class="come_back_button" href="{% url 'shop:OrderDetailsListView' %}">
+    <p>Назад</p>
+</a>
+<div class="form-wrapper1">
+    <h1 class="name_oparetion" style="text-align: center;">Обновить детали заказа</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div>
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {% if field.name == 'status' %}
+                    {{ field }}
+                {% else %}
+                    <input type="{{ field.field.widget.input_type }}" 
+                        name="{{ field.html_name }}" 
+                        value="{{ field.value }}" 
+                        id="{{ field.id_for_label }}" 
+                        disabled>
+                    <input type="hidden" name="{{ field.html_name }}" value="{{ field.value }}">
+                {% endif %}
+            </div>
+        {% endfor %}
+
+    
+        <button type="submit">Изменить</button>
+    </form>
+</div>
+{% endblock %}

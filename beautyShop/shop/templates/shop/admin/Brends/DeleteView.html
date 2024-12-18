@@ -1,0 +1,19 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Удаление бренда{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_admin.html'%}
+{% endblock %}
+{% block content %}
+<a class="come_back_button" href="{% url 'shop:BrendsListView' %}"><p>Назад</p></a>
+<div class="form-wrapper1">
+    <form method="post" action="{% url 'shop:Brend_Delete' pk=brand.pk %}">
+        {% csrf_token %}
+        <label>
+            <h1>Удалить - {{BrendsDeleteView.name_brand}}</h1>
+            <button type="submit">Удалить</button>
+        </label>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Подробная информация о стране{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_admin.html'%}
+{% endblock %}
+{% block content %}
+<br>
+    <div class='form-wrapper1'>
+        <h1 class="name_oparetion" style="text-align: center;">Просмотр</h1>
+        <div class="">
+            <div>
+                <div class="">
+                    <h2 class="">{{ CountryListView.country_name }}</h2>
+                    <div class="up_del_but">
+                        <a href = "{% url 'shop:CountryUpdateView' CountryListView.pk %}"><p>Обновить</p></a>
+                        <a href = "{% url 'shop:County_Delete' CountryListView.pk %}"><p>Удалить</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

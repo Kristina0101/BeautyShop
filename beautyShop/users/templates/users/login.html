@@ -1,0 +1,32 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Авторизация{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_user.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="login-background">
+    <div class="login-form-container">
+        <h2>Войти</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset>
+                <div class="form-group">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                </div>
+            </fieldset>
+            <div class="button-container">
+                <input class="btn-primary" type="submit" value="Войти">
+                <a href="{% url 'register' %}" class="btn-secondary">Регистрация</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

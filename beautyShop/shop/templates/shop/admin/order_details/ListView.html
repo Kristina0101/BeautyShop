@@ -1,0 +1,67 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Просмотр деталей заказов{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_admin.html'%}
+{% endblock %}
+{% block content %}
+<header>
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Заказ</th>
+        <th>Продукты</th>
+        <th>Количество</th>
+        <th>Цена за штуку</th>
+        <th>Статус</th>
+        <th>Детали</th>
+        <th>Изменение</th>
+        <th>Удаление</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for OrderDetail in OrderDetailsListView %}
+        <tr>
+          <td>{{ OrderDetail.order.user.username }}</td>
+          <td>{{ OrderDetail.products.name_product }}</td>
+          <td>{{ OrderDetail.quantity_products }}</td>
+          <td>{{ OrderDetail.unit_price }}</td>
+          <td>{{ OrderDetail.status }}</td>
+          <td><a href="{% url 'shop:OrderDetails_DetailView' OrderDetail.pk %}">Подробнее</a><br></td>
+          <td><a href="{% url 'shop:OrderDetailsUpdateView' OrderDetail.pk %}">Изменить</a><br></td>
+          <td><a href="{% url 'shop:Order_detail_Delete' OrderDetail.pk %}">Удалить</a><br></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation" class="pagination-container">
+    <ul class="pagination">
+      {% if OrderDetailsListView.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page=1" aria-label="First">&laquo;&laquo;</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ OrderDetailsListView.previous_page_number }}" aria-label="Previous">&laquo;</a>
+        </li>
+      {% endif %}
+  
+      {% for page in OrderDetailsListView.paginator.page_range %}
+        <li class="page-item{% if OrderDetailsListView.number == page %} active{% endif %}">
+          <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+        </li>
+      {% endfor %}
+  
+      {% if OrderDetailsListView.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ OrderDetailsListView.next_page_number }}" aria-label="Next">&raquo;</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ OrderDetailsListView.paginator.num_pages }}" aria-label="Last">&raquo;&raquo;</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</header>
+
+{% endblock %}

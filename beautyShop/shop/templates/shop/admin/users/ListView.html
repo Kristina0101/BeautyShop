@@ -1,0 +1,67 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Просмотр пользователя{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_admin.html'%}
+{% endblock %}
+{% block content %}
+<header>
+    <table class="table">
+    <thead>
+      <a class="add_button" href="{% url 'shop:UserCreateView' %}"><p>Добавить</p></a>
+      <tr>
+        <th>Логин</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>E-mail</th>
+        <th>Детали</th>
+        <th>Изменение</th>
+        <th>Удаление</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in UserListView %}
+        <tr>
+          <td>{{ user.username }}</td>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+          <td>{{ user.email }}</td>
+          <td><a href="{% url 'shop:UserDetailView' user.pk %}">Подробнее</a><br></td>
+          <td><a href="{% url 'shop:UserUpdateView' user.pk %}">Изменить</a><br></td>
+          <td><a href="{% url 'shop:RolesUser_Delete' user.pk %}">Удалить</a><br></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation" class="pagination-container">
+    <ul class="pagination">
+      {% if UserListView.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page=1" aria-label="First">&laquo;&laquo;</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ UserListView.previous_page_number }}" aria-label="Previous">&laquo;</a>
+        </li>
+      {% endif %}
+  
+      {% for page in UserListView.paginator.page_range %}
+        <li class="page-item{% if UserListView.number == page %} active{% endif %}">
+          <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+        </li>
+      {% endfor %}
+  
+      {% if UserListView.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ UserListView.next_page_number }}" aria-label="Next">&raquo;</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ UserListView.paginator.num_pages }}" aria-label="Last">&raquo;&raquo;</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+  
+</header>
+
+{% endblock %}

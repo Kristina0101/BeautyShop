@@ -1,0 +1,19 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Удаление заказ{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_admin.html'%}
+{% endblock %}
+{% block content %}
+<a class="come_back_button" href="{% url 'shop:OrderListView' %}"><p>Назад</p></a>
+<div class="form-wrapper1">
+    <form method="post" action="{% url 'shop:Order_Delete' pk=Order.pk %}">
+        {% csrf_token %}
+        <label>
+            <h1>Удалить - заказ {{OrderDeleteView.user.username}}</h1>
+            <button type="submit">Удалить</button>
+        </label>
+    </form>
+</div>
+{% endblock %}

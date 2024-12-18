@@ -1,0 +1,29 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Подробная информация об адресе доставки{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_admin.html'%}
+{% endblock %}
+{% block content %}
+<br>
+    <div class='form-wrapper1'>
+        <h1 class="name_oparetion" style="text-align: center;">Просмотр</h1>
+        <div class="">
+            <div>
+                <div class="">
+                    <h2 class="">Пользователь: {{ AddressListView.order }}</h2>
+                    <h2 class="">Адрес доставки: {{ AddressListView.address }}</h2>
+                    <h2 class="">Город: {{ AddressListView.city }}</h2>
+                    <h2 class="">Почтовый индекс: {{ AddressListView.postcode }}</h2>
+                    <div class="up_del_but">
+                        <a href = "{% url 'shop:AddressUpdateView' AddressListView.pk %}"><p>Обновить</p></a>
+                        <a href = "{% url 'shop:Address_Delete' AddressListView.pk %}"><p>Удалить</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

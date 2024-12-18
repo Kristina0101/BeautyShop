@@ -1,0 +1,19 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Удаление способа оплаты{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_manager.html'%}
+{% endblock %}
+{% block content %}
+<a class="come_back_button" href="{% url 'shop:PaymentMethodListView' %}"><p>Назад</p></a>
+<div class="form-wrapper1">
+    <form method="post" action="{% url 'shop:PaymentMethod_Delete' pk=PaymentMethod.pk %}">
+        {% csrf_token %}
+        <label>
+            <h1>Удалить - {{PaymentMethodDeleteView.payment_method}}</h1>
+            <button type="submit">Удалить</button>
+        </label>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,1152 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto+Slab:wght@300&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto Slab', serif;
+  background-color: #f4e7ee;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 10rem;  /* Увеличен отступ, чтобы сдвинуть содержимое к середине */
+  background-color: #d3a1b7;
+  border-bottom: 2px solid #54263b;
+}
+.baner_catalog {
+    display: flex;
+    justify-content: center; /* Центрирование изображения по горизонтали */
+    background-color: #d0a3b8;
+    padding-top: 0px;
+    padding-bottom: 20px;
+}
+
+.baner_catalog img {
+    width: 100%;
+    max-width: 1200px; /* Максимальная ширина изображения */
+    height: auto; /* Сохраняем соотношение сторон */
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #54263b;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+}
+
+.nav-links a {
+  font-family: 'Roboto Slab', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: #54263b;
+  text-decoration: none;
+  transition: color 0.3s;
+  letter-spacing: 0.05em; /* небольшое расстояние между буквами */
+}
+
+.nav-links a:hover {
+  color: #bf608c;
+}
+/* Общие стили для кнопок */
+.goOutBut {
+  font-family: 'Roboto Slab', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: #54263b;
+  background-color: transparent; /* Фон кнопки прозрачный */
+  border: none; /* Убираем рамку */
+  cursor: pointer; /* Указываем курсор в виде руки */
+  transition: color 0.3s; /* Плавный переход цвета при наведении */
+  text-decoration: none; /* Убираем подчеркивание текста */
+  letter-spacing: 0.05em; /* Небольшое расстояние между буквами */
+}
+
+.goOutBut:hover {
+  color: #bf608c; /* Цвет текста при наведении */
+}
+
+
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d3a1b7;
+    padding: 1rem 5rem;
+    margin-top: 200px;
+    border-top: 2px solid #d0a3b8;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    border: 1px solid #54263b;
+    padding: 1rem 2rem;
+    color: #54263b;
+}
+
+.footer-logo img {
+    width: 70px;
+    margin-right: 0.5rem;
+}
+
+.footer-text {
+    font-size: 0.9rem;
+    line-height: 1.2;
+    color: #54263b;
+}
+
+.footer-text strong {
+    font-size: 1rem;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin: 0 0.5rem;
+}
+
+.social-icons img {
+    width: 45px;
+    height: 45px;
+    filter: invert(18%) sepia(77%) saturate(1948%) hue-rotate(273deg) brightness(89%) contrast(88%);
+}
+
+
+.block_mp {
+    background-color: #F4E7EE;
+    
+}
+
+.text-m_p p {
+    text-align: center;
+    border: 2px solid #54263b;
+    border-radius: 30px;
+    width: 300px; 
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.product-mp {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.product-link {
+  text-decoration: none; /* Убирает подчёркивание */
+  color: inherit; /* Наследует цвет текста, чтобы он не изменялся */
+  display: block; /* Делает всю карточку кликабельной */
+}
+
+.box_link{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.product-mp-1{
+    border: 2px solid #bf608c;
+    border-radius: 30px;
+    width: 300px;
+    padding-top: 3%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 3%;
+    margin: 10px;
+}
+
+.product-mp-1:hover{
+  box-shadow: 2px 2px 6px #1b0a12;
+  padding-top: 4%;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 4%;
+}
+
+.product-mp-1 img{
+    width: 200px;
+    justify-self: center;
+    padding-bottom: 10px;
+}
+
+.product-mp-1 h3{
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+.in_cart{
+    margin-top: 10px;
+    border: 2px solid #d0a3b8;
+    border-radius: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.in_cart a{
+    text-decoration: none;
+    color: #1b0a12;
+    font-size: 16px;
+}
+
+
+.in_cart:hover {
+    background-color: #d0a3b8;
+}
+
+
+#menu__toggle {
+    opacity: 0;
+  }
+  #menu__toggle:checked + .menu__btn > span {
+    transform: rotate(45deg);
+  }
+  #menu__toggle:checked + .menu__btn > span::before {
+    top: 0;
+    transform: rotate(0deg);
+  }
+  #menu__toggle:checked + .menu__btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+  #menu__toggle:checked ~ .menu__box {
+    left: 0 !important;
+  }
+  .menu__btn {
+    position: fixed;
+    margin-top: 30px;
+    left: 20px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+.category_menu{
+    margin-left: 60px;
+    font-size: 22px;
+    color: #1b0a12;
+    margin-top: -4px;
+    
+  }
+  .menu__btn > span,
+  .menu__btn > span::before,
+  .menu__btn > span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: #bf608c;
+    transition-duration: .25s;
+  }
+  .menu__btn > span::before {
+    content: '';
+    top: -8px;
+  }
+  .menu__btn > span::after {
+    content: '';
+    top: 8px;
+  }
+  .menu__box {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 300px;
+    height: 100%;
+    margin: 0;
+    padding: 80px 0;
+    list-style: none;
+    background-color: #ffc5e0;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+    transition-duration: .25s; /* Задайте нужную максимальную высоту */
+    overflow-y: auto;  /* Добавляет вертикальную прокрутку */
+    padding: 10px;     /* Дополнительный отступ для удобства */
+    list-style: none;
+  }
+  .menu__item {
+    display: block;
+    padding: 12px 24px;
+    color: #1b0a12;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    transition-duration: .25s;
+  }
+  .menu__item:hover {
+    background-color: #d0a3b8;
+  }
+
+
+  /* Общие стили для страницы профиля */
+.profile-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  gap: 40px;
+  background-color: #f4e7ee;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Фото профиля */
+.profile-photo {
+  flex-shrink: 0;
+}
+
+.profile-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 20%;
+  border: 3px solid #d0a3b8;
+  object-fit: cover;
+}
+
+/* Информация профиля и форма */
+.profile-info {
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  background-color: #d2afc0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.profile-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 15px;
+}
+
+legend {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #54263b;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #54263b;
+  margin-bottom: 5px;
+}
+
+.form-group p,
+.form-group a {
+  color: #1b0a12;
+  text-decoration: none;
+}
+
+.form-group a:hover {
+  text-decoration: underline;
+}
+
+/* Кнопка обновления */
+.btn {
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  color: #f4e7ee;
+  background-color: #bf608c;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #54263b;
+}
+
+
+/* Стиль основного контейнера для страницы выхода */
+.logout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-color: #f4e7ee; /* Светло-серый фон */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px #54263b; /* Легкая тень */
+  max-width: 500px;
+  margin: 150px auto;
+  text-align: center;
+}
+
+/* Стиль заголовка */
+.logout-heading {
+  font-size: 1.8em;
+  color: #1b0a12; /* Темный текст */
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Контейнер для кнопки */
+.logout-action {
+  margin-top: 20px;
+}
+
+/* Основной стиль кнопки */
+.btn-primary {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1em;
+  font-weight: bold;
+  color: #f4e7ee;
+  background-color: #bf608c; /* Приятный оттенок синего */
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #54263b;
+  transform: translateY(-2px); /* Легкий подъем при наведении */
+}
+
+/* Фон для страницы входа */
+.login-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4e7ee;
+  padding: 50px 0;
+}
+
+/* Контейнер для формы входа */
+.login-form-container {
+  background-color: #d2afc0;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px #54263b;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Заголовок формы */
+.login-form-container h2 {
+  font-size: 1.8em;
+  color: #1b0a12;
+  margin-bottom: 20px;
+}
+fieldset {
+  border: none;
+}
+
+/* Стили для группы полей */
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* Поля ввода без рамок */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: none; /* Убираем рамку */
+  border-bottom: 2px solid #54263b; /* Добавляем только нижнюю границу */
+  outline: none; /* Убираем обводку при фокусе */
+  background-color: #ffc5e0; /* Легкий цвет фона */
+  font-size: 1em;
+  transition: border-color 0.3s;
+}
+
+/* Стили при фокусе для полей */
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-bottom: 2px solid #54263b; /* Изменяем цвет нижней границы при фокусе */
+}
+
+/* Контейнер для кнопок */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Кнопка "Войти" */
+.btn-primary {
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  color: #f4e7ee;
+  background-color: #bf608c;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: #54263b;
+}
+
+/* Кнопка "Регистрация" */
+.btn-secondary {
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  color: #bf608c;
+  background-color: #f4e7ee;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background-color: #d0a3b8;
+}
+
+
+/* Контейнер для страницы регистрации */
+.registration-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  background-color: #f4e7ee;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px #54263b;
+  max-width: 600px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+/* Заголовок формы */
+.registration-container .form-header h2 {
+  font-size: 1.8em;
+  color: #1b0a12;
+  margin-bottom: 20px;
+}
+
+/* Поля формы */
+.registration-form .form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.registration-form .form-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: #1b0a12;
+}
+
+.registration-form .form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+/* Кнопки */
+.button-group {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  color: #f4e7ee;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #bf608c;
+}
+
+.btn-primary:hover {
+  background-color: #54263b;
+}
+
+.btn-secondary {
+  background-color: #d0a3b8;
+}
+
+.btn-secondary:hover {
+  background-color: #bf608c;
+}
+
+.come_back_button p{
+  color: #1b0a12;
+}
+
+
+.come_back_button{
+  background-color: #ffc5e0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+  padding-right: 25px;
+  margin-top: 30px;
+  margin-left: 90px;
+  position: absolute;  /* Абсолютное позиционирование таблицы */
+  top: 10%;  /* Указываем, чтобы таблица находилась в верхней части */
+  left: 10%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  text-decoration: none;
+  border-radius: 20px;
+}
+
+.come_back_button:hover{
+  background-color: #d0a3b8;
+  padding-top: 5px;
+  padding-bottom: 8px;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+
+/* Основной контейнер карточки */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #f4e7ee;
+  border-radius: 10px;
+  background-color: #fce2ee;
+  box-shadow: 0 4px 8px #54263b;
+  transition: transform 0.3s;
+}
+
+.product-card:hover {
+  transform: scale(1.02);
+}
+
+/* Стиль изображения товара */
+.product-image img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* Блок с информацией о товаре */
+.product-details {
+  text-align: center;
+  color: #333333;
+}
+
+/* Название товара */
+.product-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #444444;
+  margin-bottom: 10px;
+}
+
+/* Цены и описание */
+.price {
+  font-size: 22px;
+  font-weight: bold;
+  color: #b12704;
+  margin: 15px 0;
+}
+
+/* Кнопка "Добавить в корзину" */
+.in-cart-btn {
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.in-cart-btn a {
+  display: inline-block;
+  padding: 10px 25px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #d0a3b8;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.in-cart-btn a:hover {
+  background-color: #b87ca4;
+}
+/* Основные стили для корзины */
+.shopping-basket {
+  background-color: #F4E7EE; /* Цвет фона для секции корзины */
+  padding: 30px; 
+}
+
+.basket-container {
+  max-width: 1200px; /* Максимальная ширина контейнера */
+  margin: 0 auto; /* Центрирование контейнера */
+  background-color: #ffffff; /* Цвет фона контейнера */
+  border-radius: 15px; /* Закругленные углы контейнера */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+  padding: 20px; /* Внутренние отступы */
+}
+
+/* Заголовок корзины */
+.basket-title {
+  text-align: center; /* Центрируем заголовок */
+  font-size: 2em; /* Размер шрифта */
+  color: #54263b; /* Цвет заголовка */
+  margin-bottom: 20px; /* Отступ снизу */
+}
+
+/* Сумма товаров в корзине */
+.basket-summary {
+  text-align: center; /* Центрируем текст */
+  margin-bottom: 20px; /* Отступ снизу */
+}
+
+/* Стили для предметов в корзине */
+.basket-items {
+  border-top: 1px solid #d0a3b8; /* Верхняя граница для разделения */
+  padding-top: 20px; /* Отступ сверху */
+}
+
+.basket-item {
+  display: flex; /* Используем flexbox для выравнивания */
+  align-items: center; /* Выравнивание по центру */
+  border-bottom: 1px solid #d0a3b8; /* Граница между товарами */
+  padding: 15px 0; /* Вертикальные отступы */
+}
+
+.item-image {
+  flex: 1; /* Занимает 1 часть свободного пространства */
+  text-align: center; /* Центрируем изображение */
+}
+
+.product-thumbnail {
+  width: 100px; /* Ширина изображения товара */
+  height: auto; /* Автоматическая высота */
+  border-radius: 10px; /* Закругленные углы изображения */
+}
+
+.item-details {
+  flex: 2; /* Занимает 2 части свободного пространства */
+}
+
+.item-name, .item-quantity, .item-price, .item-total {
+  flex: 1; /* Занимает 1 часть свободного пространства */
+  text-align: center; /* Центрируем текст */
+}
+
+.item-label {
+  font-size: 0.8em; /* Размер шрифта для меток */
+  color: #999; /* Цвет для меток */
+}
+
+.item-value {
+  font-size: 1.2em; /* Размер шрифта для значений */
+  color: #54263b; /* Цвет для значений */
+}
+
+/* Стили для ссылки удаления */
+.item-remove {
+  flex: 1; /* Занимает 1 часть свободного пространства */
+  text-align: center; /* Центрируем текст */
+}
+
+.remove-link a {
+  color: #bf608c; /* Цвет ссылки удаления */
+  text-decoration: none; /* Убираем подчеркивание */
+}
+
+.remove-link a:hover {
+  text-decoration: underline; /* Подчеркивание при наведении */
+}
+
+/* Стили для кнопок */
+.basket-actions {
+  text-align: right; /* Выравнивание кнопок по правому краю */
+  margin-top: 20px; /* Отступ сверху */
+}
+
+.btn {
+  background-color: #54263b; /* Цвет кнопки */
+  color: #ffffff; /* Цвет текста кнопки */
+  padding: 10px 20px; /* Отступы внутри кнопки */
+  border: none; /* Убираем рамку */
+  border-radius: 5px; /* Закругление углов */
+  cursor: pointer; /* Курсор в виде указателя */
+  transition: background-color 0.3s; /* Плавный переход цвета */
+}
+
+.btn.continue-shopping {
+  background-color: #d0a3b8; /* Цвет для кнопки "Продолжить покупки" */
+}
+
+.btn.continue-shopping:hover {
+  background-color: #bf608c; /* Цвет при наведении */
+}
+
+.btn.checkout {
+  margin-left: 10px; /* Отступ слева для кнопки оформления заказа */
+}
+
+.btn:hover {
+  background-color: #1b0a12; /* Темный цвет при наведении на кнопки */
+}
+
+/* Кнопка "Добавить в корзину" */
+.in-cart-btn {
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.in-cart-btn input[type="submit"] {
+  display: inline-block;
+  padding: 10px 25px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #d0a3b8; /* Цвет фона кнопки */
+  border: none; /* Убираем границу */
+  border-radius: 30px; /* Закругленные углы */
+  cursor: pointer; /* Курсор в виде указателя */
+  transition: background-color 0.3s; /* Плавный переход цвета */
+  text-decoration: none; /* Убираем подчеркивание */
+}
+
+.in-cart-btn input[type="submit"]:hover {
+  background-color: #b87ca4; /* Цвет кнопки при наведении */
+}
+
+
+/* Основные стили для страницы оформления заказа */
+.checkout-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+}
+
+.come_back_button p {
+  font-size: 1em;
+  color: #666;
+  text-decoration: underline;
+  margin-bottom: 15px;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.checkout-fieldset {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.checkout-legend {
+  font-weight: bold;
+  color: #555;
+  font-size: 1.2em;
+}
+
+.form-group {
+  margin-top: 10px;
+}
+
+label {
+  font-weight: 600;
+  color: #444;
+  margin-right: 10px;
+}
+
+input[type="text"],
+select {
+  width: calc(100% - 20px);
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.cart-items-title {
+  margin-top: 20px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.cart-items-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item-name {
+  flex: 1;
+  font-weight: 500;
+  color: #444;
+}
+
+.cart-item-quantity, .cart-item-total {
+  font-size: 1em;
+  color: #777;
+}
+
+.cart-total {
+  text-align: right;
+  font-size: 1.2em;
+  margin-top: 20px;
+  color: #333;
+}
+
+.checkout-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1em;
+  color: #f4e7ee;
+  background-color: #bf608c;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.checkout-button:hover {
+  background-color: #54263b;
+}
+
+
+/* Стиль страницы успешного оформления заказа */
+.order-success-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f4e7ee;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px #1b0a12;
+}
+
+.order-success-title {
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.order-success-message {
+  font-size: 1.2em;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.order-success-button {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 1em;
+  color: #f4e7ee;
+  background-color: #bf608c;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.order-success-button:hover {
+  background-color: #54263b;
+}
+
+.about-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  color: #333;
+  font-family: "Helvetica Neue", sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #f9f9ff, #f3f3ff);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-out;
+}
+
+.about-title {
+  font-size: 2.8em;
+  color: #a24e75;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-image {
+  margin-bottom: 25px;
+  max-width: 30%;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px #54263b;
+  background-color: #f4e7ee;
+  padding: 10px;
+}
+
+.logo-about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(45deg, #ffc5e0, #f4e7ee);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px #bf608c;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #54263b;
+  text-shadow: 1px 1px 6px #bf608c;
+}
+
+.about-text {
+  max-width: 700px;
+  text-align: left;
+  line-height: 1.7;
+  font-size: 1.15em;
+}
+
+.about-text h2 {
+  font-size: 1.8em;
+  color: #54263b;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.about-text h3 {
+  font-size: 1.4em;
+  color: #bf608c;
+  margin-top: 20px;
+}
+
+.about-text p {
+  margin-bottom: 18px;
+}
+
+.about-cta {
+  margin-top: 35px;
+}
+
+.btn-main-about {
+  padding: 12px 25px;
+  background: linear-gradient(135deg, #d0a3b8, #bf608c);
+  color: #f4e7ee;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-main-about:hover {
+  background: linear-gradient(135deg, #bf608c, #d0a3b8);
+  transform: translateY(-3px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.history-order-container {
+  border: 1px solid #bf608c;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #d0a3b8;
+  border-radius: 8px;
+}
+.history-order-header h3 {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+
+.history-order-header p {
+  font-weight: bold;
+  color: #1b0a12;
+}
+
+.history-order-items h4 {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+.history-order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.history-order-table th, .history-order-table td {
+  padding: 10px;
+  border: 1px solid #bf608c;
+  text-align: center;
+}
+
+.history-order-table th {
+  background-color: #f4e7ee;
+  font-weight: bold;
+}

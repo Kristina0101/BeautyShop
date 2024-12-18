@@ -1,0 +1,15 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Заказ оформлен{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_user.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="order-success-container">
+    <h2 class="order-success-title">Спасибо за ваш заказ!</h2>
+    <p class="order-success-message">Ваш заказ был успешно оформлен. Сообщение о заказе было направлену на почту.</p>
+    <a href="{% url 'shop:catalog' %}" class="order-success-button">Вернуться в каталог</a>
+</div>
+{% endblock %}

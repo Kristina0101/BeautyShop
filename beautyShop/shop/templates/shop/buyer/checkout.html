@@ -1,0 +1,56 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Оформление заказа{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_user.html' %}
+{% endblock %}
+
+{% block content %}
+<a class="come_back_button" style="text-decoration: none;" href="{% url 'cart:cart_detail' %}">
+    <p>Назад</p>
+</a>
+
+<div class="checkout-container">
+    <h2 class="checkout-title">Оформление заказа</h2>
+
+    <form method="post" class="checkout-form">
+        {% csrf_token %}
+        
+        <fieldset class="checkout-fieldset">
+            <legend class="checkout-legend">Адрес доставки</legend>
+            <div class="form-group">
+                {{ form.address.label_tag }} {{ form.address }}
+            </div>
+            <div class="form-group">
+                {{ form.city.label_tag }} {{ form.city }}
+            </div>
+            <div class="form-group">
+                {{ form.postcode.label_tag }} {{ form.postcode }}
+            </div>
+        </fieldset>
+        
+        <fieldset class="checkout-fieldset">
+            <legend class="checkout-legend">Способ оплаты</legend>
+            <div class="form-group">
+                {{ form.payment_method.label_tag }} {{ form.payment_method }}
+            </div>
+        </fieldset>
+
+        <h3 class="cart-items-title">Ваши товары:</h3>
+        <ul class="cart-items-list">
+            {% for item in cart %}
+                <li class="cart-item">
+                    <span class="cart-item-name">{{ item.product.name_product }}</span>
+                    <span class="cart-item-quantity">{{ item.quantity }} x {{ item.price }} руб.</span>
+                    <span class="cart-item-total">{{ item.total_price }} руб.</span>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <p class="cart-total">Итоговая сумма: <strong>{{ cart.get_total_price }} руб.</strong></p>
+
+        <button type="submit" class="checkout-button">Оформить заказ</button>
+    </form>
+</div>
+{% endblock %}

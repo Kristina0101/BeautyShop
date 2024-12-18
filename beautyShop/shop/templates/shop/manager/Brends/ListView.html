@@ -1,0 +1,62 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Просмотр брендов{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_manager.html'%}
+{% endblock %}
+{% block content %}
+<header>
+    <table class="table">
+    <thead>
+      <a class="add_button" href="{% url 'shop:BrendsCreateView' %}"><p>Добавить</p></a>
+      <tr>
+        <th>Название бренда</th>
+        <th>Страна</th>
+        <th>Детали</th>
+        <th>Изменение</th>
+        <th>Удаление</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for brend in BrendsListView %}
+        <tr>
+          <td>{{ brend.name_brand }}</td>
+          <td>{{ brend.country }}</td>
+          <td><a href="{% url 'shop:BrendsDetailView' brend.pk %}">Подробнее</a><br></td>
+          <td><a href="{% url 'shop:BrendsUpdateView' brend.pk %}">Изменить</a><br></td>
+          <td><a href="{% url 'shop:Brend_Delete' brend.pk %}">Удалить</a><br></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation" class="pagination-container">
+    <ul class="pagination">
+      {% if BrendsListView.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page=1" aria-label="First">&laquo;&laquo;</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ BrendsListView.previous_page_number }}" aria-label="Previous">&laquo;</a>
+        </li>
+      {% endif %}
+  
+      {% for page in BrendsListView.paginator.page_range %}
+        <li class="page-item{% if BrendsListView.number == page %} active{% endif %}">
+          <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+        </li>
+      {% endfor %}
+  
+      {% if BrendsListView.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ BrendsListView.next_page_number }}" aria-label="Next">&raquo;</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ BrendsListView.paginator.num_pages }}" aria-label="Last">&raquo;&raquo;</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</header>
+
+{% endblock %}

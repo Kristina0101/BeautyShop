@@ -1,0 +1,60 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Просмотр категорий{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_admin.html'%}
+{% endblock %}
+{% block content %}
+<header>
+    <table class="table">
+    <thead>
+      <a class="add_button" href="{% url 'shop:CategoryCreateView' %}"><p>Добавить</p></a>
+      <tr>
+        <th>Название категории</th>
+        <th>Детали</th>
+        <th>Изменение</th>
+        <th>Удаление</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for category in CategoryListView %}
+        <tr>
+          <td>{{ category.name_category }}</td>
+          <td><a href="{% url 'shop:CategoryDetailView' category.pk %}">Подробнее</a><br></td>
+          <td><a href="{% url 'shop:CategoryUpdateView' category.pk %}">Изменить</a><br></td>
+          <td><a href="{% url 'shop:Category_Delete' category.pk %}">Удалить</a><br></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation" class="pagination-container">
+    <ul class="pagination">
+      {% if CategoryListView.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page=1" aria-label="First">&laquo;&laquo;</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ CategoryListView.previous_page_number }}" aria-label="Previous">&laquo;</a>
+        </li>
+      {% endif %}
+  
+      {% for page in CategoryListView.paginator.page_range %}
+        <li class="page-item{% if CategoryListView.number == page %} active{% endif %}">
+          <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+        </li>
+      {% endfor %}
+  
+      {% if CategoryListView.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ CategoryListView.next_page_number }}" aria-label="Next">&raquo;</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ CategoryListView.paginator.num_pages }}" aria-label="Last">&raquo;&raquo;</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</header>
+
+{% endblock %}

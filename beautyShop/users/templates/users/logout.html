@@ -1,0 +1,16 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Выход{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_user.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="logout-container">
+    <h2 class="logout-heading">Вы вышли из своей учетной записи</h2>
+    <div class="logout-action">
+        <a href="{% url 'login' %}" class="btn-primary">Войти</a>
+    </div>
+</div>
+{% endblock %}

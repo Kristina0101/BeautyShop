@@ -1,0 +1,71 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Просмотр продуктов{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_admin.html'%}
+{% endblock %}
+{% block content %}
+<header>
+    <table class="table">
+    <thead>
+      <a class="add_button" href="{% url 'shop:ProductsCreateView' %}"><p>Добавить</p></a>
+      <tr>
+        <th>Фото товара</th>
+        <th>Наименование</th>
+        <th>Бренд</th>
+        <th>Категория</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Детали</th>
+        <th>Изменение</th>
+        <th>Удаление</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in ProductsListView %}
+        <tr>
+          <td><img style="max-height: 100px;" src="{{ product.photo_product.url }}" /></td>
+          <td>{{ product.name_product }}</td>
+          <td>{{ product.brend.name_brand }}</td>
+          <td>{{ product.category.name_category }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.quantity }}</td>
+          <td><a href="{% url 'shop:ProductsDetailView' product.pk %}">Подробнее</a><br></td>
+          <td><a href="{% url 'shop:ProductsUpdateView' product.pk %}">Изменить</a><br></td>
+          <td><a href="{% url 'shop:Products_Delete' product.pk %}">Удалить</a><br></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation" class="pagination-container">
+    <ul class="pagination">
+      {% if ProductsListView.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page=1" aria-label="First">&laquo;&laquo;</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ ProductsListView.previous_page_number }}" aria-label="Previous">&laquo;</a>
+        </li>
+      {% endif %}
+  
+      {% for page in ProductsListView.paginator.page_range %}
+        <li class="page-item{% if ProductsListView.number == page %} active{% endif %}">
+          <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+        </li>
+      {% endfor %}
+  
+      {% if ProductsListView.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ ProductsListView.next_page_number }}" aria-label="Next">&raquo;</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ ProductsListView.paginator.num_pages }}" aria-label="Last">&raquo;&raquo;</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+  
+</header>
+
+{% endblock %}

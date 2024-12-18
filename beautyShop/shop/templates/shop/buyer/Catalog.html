@@ -1,0 +1,39 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Каталог{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_user.html'%}
+{% endblock %}
+{% block content %}
+<div class="hamburger-menu">
+    <input id="menu__toggle" type="checkbox" />
+    <label class="menu__btn" for="menu__toggle">
+      <span></span>
+    </label><p class="category_menu">Категории</p>
+    {% if 'catalog/category/' in request.path %}
+    <a class="come_back_button" href="{% url 'shop:catalog' %}"><p>Назад</p></a>
+    {% endif %}
+
+    <ul class="menu__box">
+      {% for category in categories %}
+      <li><a class="menu__item" href="{% url 'shop:category_view' category.category_id %}">{{ category.name_category }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="product-mp">
+    {% for product in products %}
+    {% if product.products_id %}
+        <a href="{% url 'shop:description_product' product.products_id %}" class="product-link box_link">
+            <div class="product-mp-1">
+                <h3>{{ product.name_product }}</h3>
+                <img src="{{ product.photo_product.url }}" alt="Фото товара">
+                <p>Цена: {{ product.price }} руб.</p>
+            </div>
+        </a>
+    {% else %}
+        <p>Продукт недоступен</p>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Удаление страны{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_admin.html'%}
+{% endblock %}
+{% block content %}
+<div class="form-wrapper1">
+    <form method="post" action="{% url 'shop:County_Delete' pk=country.pk %}">
+        {% csrf_token %}
+        <label>
+            <h1>Удалить - {{CountryDeleteView.country_name}}</h1>
+            <button type="submit">Удалить</button>
+        </label>
+    </form>
+</div>
+{% endblock %}

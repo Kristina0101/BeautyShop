@@ -1,0 +1,18 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Удаление адреса{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_admin.html'%}
+{% endblock %}
+{% block content %}
+<div class="form-wrapper1">
+    <form method="post" action="{% url 'shop:Address_Delete' pk=address.pk %}">
+        {% csrf_token %}
+        <label>
+            <h1>Удалить - {{AddressDeleteView.address}}</h1>
+            <button type="submit">Удалить</button>
+        </label>
+    </form>
+</div>
+{% endblock %}

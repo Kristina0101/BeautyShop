@@ -1,0 +1,45 @@
+{% load static %}
+{% load sass_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    {% if request.path == '/' or 'catalog/' in request.path or 'register/' in request.path or 'login/' in request.path or 'profile/' in request.path or 'logout/' in request.path or 'description/' in request.path  or 'cart/' in request.path or 'order_registration/' in request.path or 'about_shop/' in request.path %}
+    <link rel="stylesheet" href="{% static 'css/user.css' %}">
+    {% elif 'admins/' in request.path or 'manager/' in request.path %}
+    <link rel="stylesheet" href="{% sass_src 'css/style.scss' %}">
+    <link rel="stylesheet" href="{% sass_src 'css/style1.scss' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    {% endif %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+
+    {% block header %}
+    {% endblock %}
+
+    {% block baner %}
+    {% endblock %}
+
+    {% if messages %}
+        	{% for message in messages %}
+          	<div class="alert alert-{{ message.tags }}">
+            	{{ message }}
+          	</div>
+        	{% endfor %}
+    {% endif %}
+    
+    {% block content %}
+    {% endblock %}
+    <br>
+    {% if request.path == '/' or 'catalog/' in request.path or 'register/' in request.path or 'login/' in request.path or 'profile/' in request.path or 'logout/' in request.path or 'description/' in request.path  or 'cart/' in request.path or 'order_registration/' in request.path or 'about_shop/' in request.path %}    <footer>
+        {% include 'Includes/footer.html'%}
+    </footer>
+    {% endif %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/script.js'%}"></script>
+</body>
+</html>

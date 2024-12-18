@@ -1,0 +1,26 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Подробная информация об оплате{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_manager.html'%}
+{% endblock %}
+{% block content %}
+<br>
+<a class="come_back_button" href="{% url 'shop:PaymentListView' %}"><p>Назад</p></a>
+    <div class='form-wrapper1'>
+        <h1 class="name_oparetion" style="text-align: center;">Просмотр</h1>
+        <div class="">
+            <div>
+                <div class="">
+                    <h2 class="">Пользователь: {{ PaymentListView.order.user.username }}</h2>
+                    <h2 class="">Дата оплаты: {{ PaymentListView.date_payment }}</h2>
+                    <h2 class="">Сумма оплаты: {{ PaymentListView.sum_payment }} руб.</h2>
+                    <h2 class="">Способ оплаты: {{ PaymentListView.payment_method }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

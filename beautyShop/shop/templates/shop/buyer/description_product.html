@@ -1,0 +1,35 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Информация о {{ products.name_product }}{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_user.html' %}
+{% endblock %}
+
+{% block content %}
+<a class="come_back_button" href="{% url 'shop:catalog' %}"><p>Назад</p></a>
+    <div class="product-card">
+        <div class="product-image">
+            <img src="{{ products.photo_product.url }}" alt="Фото товара">
+        </div>
+        <div class="product-details">
+            <h3 class="product-title">{{ products.name_product }}</h3>
+            <p><strong>Бренд:</strong> {{ products.brend.name_brand }}</p>
+            <p><strong>Страна производства:</strong> {{ products.brend.country }}</p>
+            <p><strong>Категория:</strong> {{ products.category.name_category }}</p>
+            <p><strong>Количество на складе:</strong> {{ products.quantity }}</p>
+            <p class="price">Цена: {{ products.price }} руб.</p>
+            {% if user.is_authenticated %}
+            <form class="in-cart-btn" action="{% url 'cart:cart_add' product_id=products.products_id %}" method="post">
+                {{ cart_product_form }}
+                {% csrf_token %}
+                <input type="submit" value="Добавить в корзину">
+            </form>
+            {% else %}
+            <form class="in-cart-btn" onclick="alert('Для добавления в корзину необходимо авторизоваться!')">
+                <input type="submit" value="Добавить в корзину">
+            </form>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

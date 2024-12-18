@@ -1,0 +1,22 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Обновление адреса{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_admin.html'%}
+{% endblock %}
+{% block content %}
+<div class="form-wrapper1">
+    <h1 class="name_oparetion" style="text-align: center;">Обновить адрес доставки</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <label>
+            <br>
+            <button type="submit">Изменить</button>
+        </label>
+    </form>
+</div>
+{% endblock %}
+
+

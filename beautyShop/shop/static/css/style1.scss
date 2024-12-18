@@ -1,0 +1,369 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
+
+$primary-color: #bf608c;
+$secondary-color: #54263b;
+$text-color: #777;
+$light-color :#fff;
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+.body1 {
+  font-family: Lato;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #777;
+  padding:3rem;
+  background:#f4e7ee;
+  box-sizing: border-box;
+}
+
+.menu-icon {
+position: fixed;
+    right: 5rem;
+    top: 5rem;
+  height: 8rem;
+  cursor: pointer;
+  z-index: 10000;
+}
+.menu-icon img {
+  height:100%;
+}
+
+.nav-bar {
+  background:#f4e7ee;
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display: none;
+  z-index: 9999;
+}
+.table {
+  width: 80%;
+  margin: 0 auto;
+  position: absolute;  /* Абсолютное позиционирование таблицы */
+  top: 20%;  /* Указываем, чтобы таблица находилась в верхней части */
+  left: 50%;
+  transform: translateX(-50%);  /* Центрируем таблицу */
+}
+
+.form-wrapper {
+  margin: 0 auto;
+  position: absolute;  /* Абсолютное позиционирование таблицы */
+  top: 50%;  /* Указываем, чтобы таблица находилась в верхней части */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.form-wrapper1 {
+  margin: 0 auto;
+  position: absolute;  /* Абсолютное позиционирование таблицы */
+  top: 40%;  /* Указываем, чтобы таблица находилась в верхней части */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.add_button{
+  background-color: #ffc5e0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+  padding-right: 25px;
+  margin-bottom: 20px;
+  position: absolute;  /* Абсолютное позиционирование таблицы */
+  top: 10%;  /* Указываем, чтобы таблица находилась в верхней части */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  text-decoration: none;
+  border-radius: 20px;
+}
+.add_button p{
+  color: #1b0a12;
+}
+
+.come_back_button p{
+  color: #1b0a12;
+}
+
+
+.come_back_button{
+  background-color: #ffc5e0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+  padding-right: 25px;
+  position: absolute;  /* Абсолютное позиционирование таблицы */
+  top: 10%;  /* Указываем, чтобы таблица находилась в верхней части */
+  left: 10%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  text-decoration: none;
+  border-radius: 20px;
+}
+
+.come_back_button:hover{
+  background-color: #d0a3b8;
+  padding-top: 5px;
+  padding-bottom: 8px;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.add_button:hover{
+  background-color: #d0a3b8;
+  padding-top: 5px;
+  padding-bottom: 8px;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.name_oparetion{
+  font-size: 40px;
+}
+.up_del_but {
+  display: flex;
+  justify-content: space-between; /* Распределяем кнопки по сторонам */
+  gap: 1rem; /* Добавляем расстояние между кнопками */
+  margin-top: 1rem;
+}
+
+.up_del_but a {
+  background-color: #ffc5e0;
+  padding: 5px 10px;  /* Увеличил паддинг для кнопок */
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 10px;
+  text-align: center;
+  flex: 1; /* Кнопки будут одинакового размера */
+}
+
+.up_del_but a:hover {
+  background-color: #d0a3b8;
+}
+
+.up_del_but p {
+  margin: 0; /* Убираем отступы для текста внутри кнопок */
+  color: #1b0a12;
+}
+
+.export_but a{
+  font-size: 20px;
+}
+
+button {
+  position: relative;
+  margin-left: 35%;
+}
+
+.table th, .table td {
+  padding: 1rem;
+  border: 1px solid #54263b;
+}
+
+.table td a {
+  color: #54263b;
+  text-decoration: none;
+}
+
+.table td a:hover {
+  color: #bf608c;
+}
+
+.nav-bar ul {
+  list-style:none;
+  padding:0;
+  margin:0;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%)
+}
+
+.nav-bar ul li {
+  display: block;
+  text-align:center;
+}
+
+.nav-bar ul li a {
+  text-decoration: none;
+  color: #1b0a12;
+  font-size: 3.5rem;
+  transition: all .3s ease;
+}
+
+.nav-bar ul li a:hover {
+  color:#54263b;
+}
+
+.main-wrapper {
+  background: #fff;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    display: block;
+    overflow: hidden;
+    min-height: 90rem;
+    position: relative;
+    margin: 0 auto;
+}
+
+
+/* Trying some cool stuff :p */
+// Mixin example
+@mixin button-style($color)  {
+  background:$color;
+  padding:1.5rem 4rem;
+  display:inline-block;
+  margin-top:3rem;
+  text-decoration:none;
+  border-radius:10rem;
+  transition: all .2s;
+  position:relative;
+  font-size:1.8rem;
+  backface-visibility:hidden;
+}
+
+// Extend example
+%feature-content-styles {
+  color: #fff;
+  display:block;
+  text-transform: uppercase;
+}
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translatex(-100px);
+  }
+  80% {
+    transform: translatex(10px);
+  }
+  100% {
+    opacity:1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translatex(100px);
+  }
+  80% {
+    transform: translatex(-10px);
+  }
+  100% {
+    opacity:1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity:1;
+    transform: translate(0);
+  }
+}
+
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  display: inline-block;
+  padding: 8px 12px;
+  font-size: 16px;
+  color: $secondary-color;
+  background-color: $light-color;
+  border: 1px solid $secondary-color;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $primary-color;
+    color: $light-color;
+  }
+}
+
+.page-item.active .page-link {
+  background-color: $primary-color;
+  color: $light-color;
+  border-color: $primary-color;
+  font-weight: bold;
+}
+
+.page-item:first-child .page-link,
+.page-item:last-child .page-link {
+  padding: 8px 10px;
+}
+
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d3a1b7;
+  padding: 1rem 5rem;
+  border-top: 2px solid #d0a3b8;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  border: 1px solid #54263b;
+  padding: 1rem 2rem;
+  color: #54263b;
+}
+
+.footer-logo img {
+  width: 70px;
+  margin-right: 0.5rem;
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  line-height: 1.2;
+  color: #54263b;
+}
+
+.footer-text strong {
+  font-size: 1rem;
+}
+
+.social-icons a {
+  display: inline-block;
+  margin: 0 0.5rem;
+}
+
+.social-icons img {
+  width: 45px;
+  height: 45px;
+  filter: invert(18%) sepia(77%) saturate(1948%) hue-rotate(273deg) brightness(89%) contrast(88%);
+}
+

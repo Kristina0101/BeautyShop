@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f4e7ee;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid #bf608c;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #d0a3b8;
+            text-align: center;
+        }
+        .detail_info{
+            font-style: italic;
+            font-weight:bold;
+        }
+        h3 {
+            color: #54263b;
+        }
+        p, .order-details, .address-details, .total {
+            margin-top: 10px;
+            color: #1b0a12;
+        }
+        .order-details, .address-details {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #d2afc0;
+            border-radius: 8px;
+        }
+        .order-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #d0a3b8;
+            color: #54263b;
+        }
+        .total {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #d0a3b8;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #bf608c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Ваш заказ успешно оформлен!</h2>
+        <p>Здравствуйте, {{ user.username }}!</p>
+        <p>Ваш заказ был успешно оформлен.</p>
+        <p>Статус заказа: в обработке</p>
+        <p class="detail_info">Детали заказа:</p>
+
+        <div class="order-details">
+            <h3>Товары:</h3>
+            {% for item in ordered_items %}
+                <div class="order-item">
+                    {{ item.product.name_product }} - {{ item.quantity }} шт. x {{ item.price }} руб.
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="address-details">
+            <h3>Адрес доставки:</h3>
+            <p>{{ address }}, {{ city }}, {{ postcode }}</p>
+        </div>
+
+        <div class="total">
+            <p>Итоговая сумма: {{ total_amount }} руб.</p>
+        </div>
+
+        <p class="footer">Спасибо за покупку!<br>С уважением, Ваша команда магазина BEAUTYSHOP.</p>
+    </div>
+</body>
+</html>

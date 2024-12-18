@@ -1,0 +1,87 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Профиль{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_user.html'%}
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-photo">
+        <img class="profile-img rounded-circle" src="{{ user.profile.image.url }}" alt="Profile Image">
+    </div>
+    <div class="profile-info">
+        <form method="POST" enctype="multipart/form-data" class="profile-form">
+            {% csrf_token %}
+            <fieldset class="profile-fieldset">
+                <legend>Ваш профиль</legend>
+                <div class="form-group">
+                    <label for="id_username">Логин:</label>
+                    {{ u_form.username }}
+                </div>
+                <div class="form-group">
+                    <label for="id_first_name">Имя:</label>
+                    {{ u_form.first_name }}
+                </div>
+                <div class="form-group">
+                    <label for="id_last_name">Фамилия:</label>
+                    {{ u_form.last_name }}
+                </div>
+                <div class="form-group">
+                    <label for="id_email">E-mail:</label>
+                    {{ u_form.email }}
+                </div>
+                <div class="form-group">
+                    <label for="id_picture">Текущая фотография:</label>
+                    <p><a href="{{ user.profile.image.url }}" target="_blank">{{ user.profile.image.url }}</a></p>
+                </div>
+                <div class="form-group">
+                    <label for="id_picture">Изменить фотографию:</label>
+                    {{ p_form.image }}
+                </div>
+            </fieldset>
+            <button class="btn btn-primary" type="submit">Обновить</button>
+        </form>
+    </div>
+</div>
+
+<h2>История заказов</h2>
+
+{% if user_orders %}
+    {% for order in user_orders %}
+        <div class="history-order-container">
+            <div class="history-order-header">
+                <h3>Заказ №{{ order.order_id }} от {{ order.dates_order|date:"d.m.Y H:i" }}</h3>
+                <p><strong>Сумма заказа:</strong> {{ order.total_amount }} руб.</p>
+            </div>
+            <div class="history-order-items">
+                <h4>Товары в заказе:</h4>
+                <table class="history-order-table">
+                    <thead>
+                        <tr>
+                            <th>Название товара</th>
+                            <th>Количество</th>
+                            <th>Цена за единицу</th>
+                            <th>Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.orderdetails_set.all %}
+                            <tr>
+                                <td>{{ item.products.name_product }}</td>
+                                <td>{{ item.quantity_products }} шт.</td>
+                                <td>{{ item.unit_price }} руб.</td>
+                                <td>{{ item.status }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>У вас еще нет заказов.</p>
+{% endif %}
+
+{% endblock %}

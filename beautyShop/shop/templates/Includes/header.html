@@ -1,0 +1,88 @@
+<div class="main-wrapper">
+<header class="header">
+    <div class="logo">
+    <h1>BeautyShop</h1>
+    </div>
+    <div class="feature-content">
+    <h1>Страница администратора</h1>
+    <p>Добро пожаловать в систему!</p>
+    <div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="theme-btn btn-animated btn-link">Выйти</button>
+        </form>
+    </div>
+
+
+    </div>
+</header>
+
+<div class="menu-icon">
+    <img src="https://img.icons8.com/cotton/2x/menu.png"/>
+    </div>
+
+<div class="nav-bar">
+    <ul>
+    <li>
+        <a href="{% url 'shop:home_page_admin' %}">
+        Главная страница
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'shop:UserListView' %}">
+        Пользователи
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'shop:RolesListView' %}">
+        Роли
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'shop:RolesUserListView' %}">
+        Роли пользователей
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'shop:ProductsListView' %}">
+        Продукты
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'shop:BrendsListView' %}">
+        Бренды
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'shop:CategoryListView' %}">
+        Категории
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'shop:OrderListView' %}">
+        Заказы
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'shop:OrderDetailsListView' %}">
+        Детали заказов
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'shop:PaymentListView' %}">
+        Оплата
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'shop:AddressListView' %}">
+        Адреса доставки
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'shop:CountryListView' %}">
+        Страны
+        </a>
+    </li>
+    </ul>
+</div>
+</div>

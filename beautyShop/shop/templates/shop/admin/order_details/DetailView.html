@@ -1,0 +1,31 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Подробная информация о деталях заказа{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_admin.html'%}
+{% endblock %}
+{% block content %}
+<br>
+<a class="come_back_button" href="{% url 'shop:OrderDetailsListView' %}"><p>Назад</p></a>
+    <div class='form-wrapper1'>
+        <h1 class="name_oparetion" style="text-align: center;">Просмотр</h1>
+        <div class="">
+            <div>
+                <div class="">
+                    <h2 class="">Пользователь: {{ OrderDetailsListView.order.user.username }}</h2>
+                    <h2 class="">Продукт: {{ OrderDetailsListView.products.name_product }}</h2>
+                    <h2 class="">Количество: {{ OrderDetailsListView.quantity_products }}</h2>
+                    <h2 class="">Цена за штуку: {{ OrderDetailsListView.unit_price }} руб.</h2>
+                    <h2 class="">Статус: {{ OrderDetailsListView.status }}</h2>
+                    <div class="up_del_but">
+                        <a href = "{% url 'shop:OrderDetailsUpdateView' OrderDetailsListView.pk %}"><p>Обновить</p></a>
+                        <a href = "{% url 'shop:Order_detail_Delete' OrderDetailsListView.pk %}"><p>Удалить</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

@@ -1,0 +1,27 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Подробная информация о статусе{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_manager.html'%}
+{% endblock %}
+{% block content %}
+<br>
+<a class="come_back_button" href="{% url 'shop:StatusListView' %}"><p>Назад</p></a>
+    <div class='form-wrapper1'>
+        <h1 class="name_oparetion" style="text-align: center;">Просмотр</h1>
+        <div class="">
+            <div>
+                <div class="">
+                    <h2 class="">{{ StatusListView.name_status }}</h2>
+                    <div class="up_del_but">
+                        <a href = "{% url 'shop:StatusUpdateView' StatusListView.pk %}"><p>Обновить</p></a>
+                        <a href = "{% url 'shop:Status_Delete' StatusListView.pk %}"><p>Удалить</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

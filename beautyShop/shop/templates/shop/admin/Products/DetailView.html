@@ -1,0 +1,33 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Подробная информация о продукте{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_admin.html'%}
+{% endblock %}
+{% block content %}
+<br>
+<a class="come_back_button" href="{% url 'shop:ProductsListView' %}"><p>Назад</p></a>
+    <div class='form-wrapper1'>
+        <h1 class="name_oparetion" style="text-align: center;">Просмотр</h1>
+        <div class="">
+            <div>
+                <div class="">
+                    <h2 class=""><img style="max-height: 300px;" src="{{ product.photo_product.url }}"></h2>
+                    <h2 class="">Наименование: {{ ProductsListView.name_product }}</h2>
+                    <h2 class="">Бренд: {{ ProductsListView.brend.name_brand }}</h2>
+                    <h2 class="">Страна производства: {{ ProductsListView.brend.country }}</h2>
+                    <h2 class="">Категория: {{ ProductsListView.category.name_category }}</h2>
+                    <h2 class="">Цена: {{ ProductsListView.price }}</h2>
+                    <h2 class="">Количество: {{ ProductsListView.quantity }}</h2>
+                    <div class="up_del_but">
+                        <a href = "{% url 'shop:ProductsUpdateView' ProductsListView.pk %}"><p>Обновить</p></a>
+                        <a href = "{% url 'shop:Products_Delete' ProductsListView.pk %}"><p>Удалить</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

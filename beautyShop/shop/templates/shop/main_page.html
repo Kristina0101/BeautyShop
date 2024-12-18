@@ -1,0 +1,36 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Главная{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_user.html'%}
+{% endblock %}
+{% block baner %}
+<div class="baner_catalog">
+    <img src="{% static 'img/Банер.png' %}" alt="банер">
+</div>
+{% endblock %}
+{% block content %}
+<div class="block_mp">
+    <div class="text-m_p">
+        <p>Новинки косметики</p>
+    </div>
+    <div class="product-mp">
+        {% for product in products|slice:":8" %}
+        {% if product.products_id %}
+        <a href="{% url 'shop:description_product' product.products_id %}" class="product-link box_link">
+            <div class="product-mp-1">
+                <h3>{{ product.name_product }}</h3>
+                <img src="{{ product.photo_product.url }}" alt="Фото товара">
+                <p>Цена: {{ product.price }} руб.</p>
+            </div>
+        </a>
+        {% else %}
+            <p>Продукт недоступен</p>
+        {% endif %}
+        {% endfor %}
+    </div>
+    
+</div>
+
+{% endblock %}

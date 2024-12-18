@@ -1,0 +1,68 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Корзина покупок{% endblock %}
+
+{% block header %}
+    {% include 'Includes/header_user.html' %}
+{% endblock %}
+
+{% block content %}
+<section class="shopping-basket">
+    <div class="basket-container">
+        <h1 class="basket-title">Корзина покупок</h1>
+        
+        {% if cart|length > 0 %}
+            <div class="basket-summary">
+                <p>
+                    <span class="basket-heading">Корзина</span>
+                    <span class="basket-item-count"> ({{ cart|length }} товар(ов) в вашей корзине)</span>
+                </p>
+
+                <div class="basket-items">
+                    {% for item in cart %}
+                        {% with product=item.product %}
+                            <div class="basket-item">
+                                <div class="item-image">
+                                    <a href="{{ product.get_absolute_url }}">
+                                        <img class="product-thumbnail" src="{{ product.photo_product.url }}" alt="{{ product.name_product }}">
+                                    </a>
+                                </div>
+                                <div class="item-details">
+                                    <div class="item-name">
+                                        <p class="item-label">Наименование</p>
+                                        <p class="item-value">{{ product.name_product }}</p>
+                                    </div>
+                                </div>
+                                <div class="item-quantity">
+                                    <p class="item-label">Количество</p>
+                                    <p class="item-value">{{ item.quantity }}</p>
+                                </div>
+                                <div class="item-price">
+                                    <p class="item-label">Цена</p>
+                                    <p class="item-value">{{ item.price }} руб.</p>
+                                </div>
+                                <div class="item-total">
+                                    <p class="item-label">Итого</p>
+                                    <p class="item-value">{{ item.total_price }} руб.</p>
+                                </div>
+                                <div class="item-remove">
+                                    <p class="remove-link"><a href="{% url 'cart:cart_remove' product.products_id %}">Удалить</a></p>
+                                </div>
+                            </div>
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="basket-actions">
+                <a href="{% url 'shop:catalog' %}" class="btn continue-shopping">Продолжить покупки</a>
+                <a href="{% url 'shop:checkout' %}" class="btn checkout">Оформить заказ</a>
+            </div>
+        {% else %}
+            <div class="basket-empty">
+                <p>Ваша корзина пуста. Добавьте товары, чтобы оформить заказ.</p> <br><br>
+                <a href="{% url 'shop:catalog' %}" class="btn continue-shopping">Перейти к покупкам</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

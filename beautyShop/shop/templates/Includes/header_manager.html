@@ -1,0 +1,64 @@
+<body class="body1">
+    <div class="main-wrapper">
+        <div class="menu-icon">
+            <img src="https://img.icons8.com/cotton/2x/menu.png"/>
+            </div>
+        
+        <div class="nav-bar">
+            <ul>
+                <li>
+                    <a href="{% url 'shop:home_page_manager' %}">
+                    Главная страница
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'shop:ProductsListView' %}">
+                    Продукты
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'shop:CategoryListView' %}">
+                    Категории
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'shop:BrendsListView' %}">
+                    Бренды
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'shop:OrderDetailsListView' %}">
+                    Детали заказов
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'shop:OrderListView' %}">
+                    Заказы
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'shop:AddressListView' %}">
+                    Адрес доставки
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'shop:PaymentListView' %}">
+                    Оплата
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'shop:StatusListView' %}">
+                    Статусы
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'shop:PaymentMethodListView' %}">
+                    Способы оплаты
+                    </a>
+                </li>
+            </ul>
+        </div>
+        {% block info %}
+        {% endblock %}
+    </div>
+</body>

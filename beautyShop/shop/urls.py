@@ -6,6 +6,7 @@ from .import views
 app_name = 'shop'
 urlpatterns = [
     path('', views.main_page, name='main_page'),
+    path('metrics/', include('django_prometheus.urls')),
     path('catalog/', views.catalog, name='catalog'),
     path('about_shop/', views.about_shop, name='about_shop'),
     path('description/<int:products_id>/', views.description_product, name='description_product'),

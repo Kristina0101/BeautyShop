@@ -1,5 +1,3 @@
-# cart/views.py
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from shop.models import Products
@@ -12,7 +10,6 @@ def cart_add(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Products, products_id = product_id)
     
-    # Передаем доступное количество в форму
     form = CartAddProductForm(request.POST, max_quantity=product.quantity)
     if form.is_valid():
         cd = form.cleaned_data
@@ -22,7 +19,7 @@ def cart_add(request, product_id):
     return redirect('cart:cart_detail')
 
 
-def cart_remove(request, product_id):  # Изменено на `product_id`
+def cart_remove(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Products, products_id=product_id)
     cart.remove(product)

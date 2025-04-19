@@ -15,13 +15,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 10rem;  /* Увеличен отступ, чтобы сдвинуть содержимое к середине */
+  padding: 1rem 10rem;
   background-color: #d3a1b7;
   border-bottom: 2px solid #54263b;
 }
 .baner_catalog {
     display: flex;
-    justify-content: center; /* Центрирование изображения по горизонтали */
+    justify-content: center;
     background-color: #d0a3b8;
     padding-top: 0px;
     padding-bottom: 20px;
@@ -29,8 +29,8 @@ body {
 
 .baner_catalog img {
     width: 100%;
-    max-width: 1200px; /* Максимальная ширина изображения */
-    height: auto; /* Сохраняем соотношение сторон */
+    max-width: 1200px; 
+    height: auto;
 }
 
 .logo {
@@ -52,28 +52,28 @@ body {
   color: #54263b;
   text-decoration: none;
   transition: color 0.3s;
-  letter-spacing: 0.05em; /* небольшое расстояние между буквами */
+  letter-spacing: 0.05em;
 }
 
 .nav-links a:hover {
   color: #bf608c;
 }
-/* Общие стили для кнопок */
+
 .goOutBut {
   font-family: 'Roboto Slab', serif;
   font-size: 22px;
   font-weight: 300;
   color: #54263b;
-  background-color: transparent; /* Фон кнопки прозрачный */
-  border: none; /* Убираем рамку */
-  cursor: pointer; /* Указываем курсор в виде руки */
-  transition: color 0.3s; /* Плавный переход цвета при наведении */
-  text-decoration: none; /* Убираем подчеркивание текста */
-  letter-spacing: 0.05em; /* Небольшое расстояние между буквами */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  text-decoration: none;
+  letter-spacing: 0.05em;
 }
 
 .goOutBut:hover {
-  color: #bf608c; /* Цвет текста при наведении */
+  color: #bf608c;
 }
 
 
@@ -144,9 +144,9 @@ body {
     justify-content: center;
 }
 .product-link {
-  text-decoration: none; /* Убирает подчёркивание */
-  color: inherit; /* Наследует цвет текста, чтобы он не изменялся */
-  display: block; /* Делает всю карточку кликабельной */
+  text-decoration: none; 
+  color: inherit;
+  display: block;
 }
 
 .box_link{
@@ -271,9 +271,9 @@ body {
     list-style: none;
     background-color: #ffc5e0;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
-    transition-duration: .25s; /* Задайте нужную максимальную высоту */
-    overflow-y: auto;  /* Добавляет вертикальную прокрутку */
-    padding: 10px;     /* Дополнительный отступ для удобства */
+    transition-duration: .25s;
+    overflow-y: auto;
+    padding: 10px;
     list-style: none;
   }
   .menu__item {
@@ -290,8 +290,6 @@ body {
     background-color: #d0a3b8;
   }
 
-
-  /* Общие стили для страницы профиля */
 .profile-container {
   display: flex;
   align-items: flex-start;
@@ -305,7 +303,6 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Фото профиля */
 .profile-photo {
   flex-shrink: 0;
 }
@@ -318,7 +315,7 @@ body {
   object-fit: cover;
 }
 
-/* Информация профиля и форма */
+
 .profile-info {
   max-width: 500px;
   width: 100%;
@@ -368,7 +365,7 @@ legend {
   text-decoration: underline;
 }
 
-/* Кнопка обновления */
+
 .btn {
   padding: 10px 20px;
   font-size: 1em;
@@ -386,42 +383,42 @@ legend {
 }
 
 
-/* Стиль основного контейнера для страницы выхода */
+
 .logout-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 40px;
-  background-color: #f4e7ee; /* Светло-серый фон */
+  background-color: #f4e7ee;
   border-radius: 10px;
-  box-shadow: 0 4px 12px #54263b; /* Легкая тень */
+  box-shadow: 0 4px 12px #54263b;
   max-width: 500px;
   margin: 150px auto;
   text-align: center;
 }
 
-/* Стиль заголовка */
+
 .logout-heading {
   font-size: 1.8em;
-  color: #1b0a12; /* Темный текст */
+  color: #1b0a12;
   margin-bottom: 20px;
   font-weight: bold;
 }
 
-/* Контейнер для кнопки */
+
 .logout-action {
   margin-top: 20px;
 }
 
-/* Основной стиль кнопки */
+
 .btn-primary {
   display: inline-block;
   padding: 12px 24px;
   font-size: 1em;
   font-weight: bold;
   color: #f4e7ee;
-  background-color: #bf608c; /* Приятный оттенок синего */
+  background-color: #bf608c;
   border: none;
   border-radius: 5px;
   text-decoration: none;
@@ -431,10 +428,10 @@ legend {
 
 .btn-primary:hover {
   background-color: #54263b;
-  transform: translateY(-2px); /* Легкий подъем при наведении */
+  transform: translateY(-2px);
 }
 
-/* Фон для страницы входа */
+
 .login-background {
   display: flex;
   justify-content: center;
@@ -443,7 +440,7 @@ legend {
   padding: 50px 0;
 }
 
-/* Контейнер для формы входа */
+
 .login-form-container {
   background-color: #d2afc0;
   padding: 30px;
@@ -454,7 +451,7 @@ legend {
   text-align: center;
 }
 
-/* Заголовок формы */
+
 .login-form-container h2 {
   font-size: 1.8em;
   color: #1b0a12;
@@ -464,39 +461,39 @@ fieldset {
   border: none;
 }
 
-/* Стили для группы полей */
+
 .form-group {
   margin-bottom: 15px;
   text-align: left;
 }
 
-/* Поля ввода без рамок */
+
 input[type="text"],
 input[type="password"] {
   width: 100%;
   padding: 10px;
-  border: none; /* Убираем рамку */
-  border-bottom: 2px solid #54263b; /* Добавляем только нижнюю границу */
-  outline: none; /* Убираем обводку при фокусе */
-  background-color: #ffc5e0; /* Легкий цвет фона */
+  border: none;
+  border-bottom: 2px solid #54263b;
+  outline: none;
+  background-color: #ffc5e0;
   font-size: 1em;
   transition: border-color 0.3s;
 }
 
-/* Стили при фокусе для полей */
+
 input[type="text"]:focus,
 input[type="password"]:focus {
-  border-bottom: 2px solid #54263b; /* Изменяем цвет нижней границы при фокусе */
+  border-bottom: 2px solid #54263b;
 }
 
-/* Контейнер для кнопок */
+
 .button-container {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
-/* Кнопка "Войти" */
+
 .btn-primary {
   padding: 10px 20px;
   font-size: 1em;
@@ -514,7 +511,7 @@ input[type="password"]:focus {
   background-color: #54263b;
 }
 
-/* Кнопка "Регистрация" */
+
 .btn-secondary {
   padding: 10px 20px;
   font-size: 1em;
@@ -533,7 +530,7 @@ input[type="password"]:focus {
 }
 
 
-/* Контейнер для страницы регистрации */
+
 .registration-container {
   display: flex;
   flex-direction: column;
@@ -547,14 +544,14 @@ input[type="password"]:focus {
   text-align: center;
 }
 
-/* Заголовок формы */
+
 .registration-container .form-header h2 {
   font-size: 1.8em;
   color: #1b0a12;
   margin-bottom: 20px;
 }
 
-/* Поля формы */
+
 .registration-form .form-group {
   margin-bottom: 15px;
   text-align: left;
@@ -575,7 +572,7 @@ input[type="password"]:focus {
   font-size: 1em;
 }
 
-/* Кнопки */
+
 .button-group {
   display: flex;
   justify-content: space-around;
@@ -623,8 +620,8 @@ input[type="password"]:focus {
   padding-right: 25px;
   margin-top: 30px;
   margin-left: 90px;
-  position: absolute;  /* Абсолютное позиционирование таблицы */
-  top: 10%;  /* Указываем, чтобы таблица находилась в верхней части */
+  position: absolute;
+  top: 10%;
   left: 10%;
   transform: translateX(-50%);
   font-size: 16px;
@@ -641,7 +638,7 @@ input[type="password"]:focus {
 }
 
 
-/* Основной контейнер карточки */
+
 .product-card {
   display: flex;
   flex-direction: column;
@@ -661,7 +658,6 @@ input[type="password"]:focus {
   transform: scale(1.02);
 }
 
-/* Стиль изображения товара */
 .product-image img {
   width: 100%;
   max-width: 400px;
@@ -670,13 +666,13 @@ input[type="password"]:focus {
   margin-bottom: 20px;
 }
 
-/* Блок с информацией о товаре */
+
 .product-details {
   text-align: center;
   color: #333333;
 }
 
-/* Название товара */
+
 .product-title {
   font-size: 24px;
   font-weight: bold;
@@ -684,7 +680,7 @@ input[type="password"]:focus {
   margin-bottom: 10px;
 }
 
-/* Цены и описание */
+
 .price {
   font-size: 22px;
   font-weight: bold;
@@ -692,7 +688,7 @@ input[type="password"]:focus {
   margin: 15px 0;
 }
 
-/* Кнопка "Добавить в корзину" */
+
 .in-cart-btn {
   display: inline-block;
   margin-top: 15px;
@@ -712,126 +708,124 @@ input[type="password"]:focus {
 .in-cart-btn a:hover {
   background-color: #b87ca4;
 }
-/* Основные стили для корзины */
+
 .shopping-basket {
-  background-color: #F4E7EE; /* Цвет фона для секции корзины */
+  background-color: #F4E7EE;
   padding: 30px; 
 }
 
 .basket-container {
-  max-width: 1200px; /* Максимальная ширина контейнера */
-  margin: 0 auto; /* Центрирование контейнера */
-  background-color: #ffffff; /* Цвет фона контейнера */
-  border-radius: 15px; /* Закругленные углы контейнера */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
-  padding: 20px; /* Внутренние отступы */
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
-/* Заголовок корзины */
 .basket-title {
-  text-align: center; /* Центрируем заголовок */
-  font-size: 2em; /* Размер шрифта */
-  color: #54263b; /* Цвет заголовка */
-  margin-bottom: 20px; /* Отступ снизу */
+  text-align: center;
+  font-size: 2em; 
+  color: #54263b; 
+  margin-bottom: 20px;
 }
 
-/* Сумма товаров в корзине */
 .basket-summary {
-  text-align: center; /* Центрируем текст */
-  margin-bottom: 20px; /* Отступ снизу */
+  text-align: center;
+  margin-bottom: 20px; 
 }
 
-/* Стили для предметов в корзине */
+
 .basket-items {
-  border-top: 1px solid #d0a3b8; /* Верхняя граница для разделения */
-  padding-top: 20px; /* Отступ сверху */
+  border-top: 1px solid #d0a3b8;
+  padding-top: 20px;
 }
 
 .basket-item {
-  display: flex; /* Используем flexbox для выравнивания */
-  align-items: center; /* Выравнивание по центру */
-  border-bottom: 1px solid #d0a3b8; /* Граница между товарами */
-  padding: 15px 0; /* Вертикальные отступы */
+  display: flex; 
+  align-items: center;
+  border-bottom: 1px solid #d0a3b8;
+  padding: 15px 0;
 }
 
 .item-image {
-  flex: 1; /* Занимает 1 часть свободного пространства */
-  text-align: center; /* Центрируем изображение */
+  flex: 1;
+  text-align: center;
 }
 
 .product-thumbnail {
-  width: 100px; /* Ширина изображения товара */
-  height: auto; /* Автоматическая высота */
-  border-radius: 10px; /* Закругленные углы изображения */
+  width: 100px; 
+  height: auto;
+  border-radius: 10px;
 }
 
 .item-details {
-  flex: 2; /* Занимает 2 части свободного пространства */
+  flex: 2;
 }
 
 .item-name, .item-quantity, .item-price, .item-total {
-  flex: 1; /* Занимает 1 часть свободного пространства */
-  text-align: center; /* Центрируем текст */
+  flex: 1;
+  text-align: center;
 }
 
 .item-label {
-  font-size: 0.8em; /* Размер шрифта для меток */
-  color: #999; /* Цвет для меток */
+  font-size: 0.8em;
+  color: #999;
 }
 
 .item-value {
-  font-size: 1.2em; /* Размер шрифта для значений */
-  color: #54263b; /* Цвет для значений */
+  font-size: 1.2em;
+  color: #54263b;
 }
 
-/* Стили для ссылки удаления */
+
 .item-remove {
-  flex: 1; /* Занимает 1 часть свободного пространства */
-  text-align: center; /* Центрируем текст */
+  flex: 1; 
+  text-align: center;
 }
 
 .remove-link a {
-  color: #bf608c; /* Цвет ссылки удаления */
-  text-decoration: none; /* Убираем подчеркивание */
+  color: #bf608c;
+  text-decoration: none;
 }
 
 .remove-link a:hover {
-  text-decoration: underline; /* Подчеркивание при наведении */
+  text-decoration: underline;
 }
 
-/* Стили для кнопок */
+
 .basket-actions {
-  text-align: right; /* Выравнивание кнопок по правому краю */
-  margin-top: 20px; /* Отступ сверху */
+  text-align: right; 
+  margin-top: 20px;
 }
 
 .btn {
-  background-color: #54263b; /* Цвет кнопки */
-  color: #ffffff; /* Цвет текста кнопки */
-  padding: 10px 20px; /* Отступы внутри кнопки */
-  border: none; /* Убираем рамку */
-  border-radius: 5px; /* Закругление углов */
-  cursor: pointer; /* Курсор в виде указателя */
-  transition: background-color 0.3s; /* Плавный переход цвета */
+  background-color: #54263b;
+  color: #ffffff;
+  padding: 10px 20px; 
+  border: none;
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s;
 }
 
 .btn.continue-shopping {
-  background-color: #d0a3b8; /* Цвет для кнопки "Продолжить покупки" */
+  background-color: #d0a3b8;
 }
 
 .btn.continue-shopping:hover {
-  background-color: #bf608c; /* Цвет при наведении */
+  background-color: #bf608c;
 }
 
 .btn.checkout {
-  margin-left: 10px; /* Отступ слева для кнопки оформления заказа */
+  margin-left: 10px;
 }
 
 .btn:hover {
-  background-color: #1b0a12; /* Темный цвет при наведении на кнопки */
+  background-color: #1b0a12;
 }
 
-/* Кнопка "Добавить в корзину" */
+
 .in-cart-btn {
   display: inline-block;
   margin-top: 15px;
@@ -842,20 +836,20 @@ input[type="password"]:focus {
   padding: 10px 25px;
   font-size: 16px;
   color: #fff;
-  background-color: #d0a3b8; /* Цвет фона кнопки */
-  border: none; /* Убираем границу */
-  border-radius: 30px; /* Закругленные углы */
-  cursor: pointer; /* Курсор в виде указателя */
-  transition: background-color 0.3s; /* Плавный переход цвета */
-  text-decoration: none; /* Убираем подчеркивание */
+  background-color: #d0a3b8;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
 }
 
 .in-cart-btn input[type="submit"]:hover {
-  background-color: #b87ca4; /* Цвет кнопки при наведении */
+  background-color: #b87ca4;
 }
 
 
-/* Основные стили для страницы оформления заказа */
+
 .checkout-container {
   max-width: 800px;
   margin: 50px auto;
@@ -971,7 +965,7 @@ select {
 }
 
 
-/* Стиль страницы успешного оформления заказа */
+
 .order-success-container {
   max-width: 600px;
   margin: 50px auto;
@@ -1149,4 +1143,10 @@ select {
 .history-order-table th {
   background-color: #f4e7ee;
   font-weight: bold;
+}
+
+.mes_error div{ 
+  text-align: center;
+  font-size: 18px;
+  margin-top: 10px;
 }

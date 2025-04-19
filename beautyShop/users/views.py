@@ -20,10 +20,10 @@ def register(request):
                 buyer_role = Roles.objects.get(name_role='buyer')
             except Roles.DoesNotExist:
                 messages.error(request, 'Роль "покупатель" не найдена.')
-                return redirect('register')  # перенаправляем назад на страницу регистрации
+                return redirect('register')
             UserRoles.objects.create(roles=buyer_role, user=user)
 
-            Profile.objects.create(user=user)
+            Profile.objects.get_or_create(user=user)
             username = form.cleaned_data.get('username')
             messages.success(request, f'Создан аккаунт {username} с ролью покупателя!')
             return redirect('shop:main_page')
@@ -48,10 +48,8 @@ def profile(request):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
-    # Получаем заказы пользователя
     user_orders = Orders.objects.filter(user=request.user).order_by('-dates_order')
 
-    # Объединяем все данные в один контекст
     context = {
         'u_form': u_form,
         'p_form': p_form,
@@ -64,6 +62,11 @@ def profile(request):
 class CustomLoginView(LoginView):
     form_class = CustomAuthenticationForm
     template_name = 'users/login.html'
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Неверный логин или пароль.")
+        return super().form_invalid(form)
+
 
     def get_success_url(self):
         user = self.request.user

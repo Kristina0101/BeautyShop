@@ -19,7 +19,6 @@ class Country(models.Model):
         managed = False
         db_table = 'country'
 
-# у человека сильно сейчас играет юнешеский маскимализм  
 class Status(models.Model):
     status_id = models.AutoField(primary_key=True)
     name_status = models.CharField(max_length=100)
@@ -131,7 +130,6 @@ class Products(models.Model):
     def __str__(self):
         return self.name_product
     class Meta:
-        managed = False
         db_table = 'products'
 
 class AuthUser(models.Model):

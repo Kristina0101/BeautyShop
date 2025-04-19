@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from beautyShop.metrics import update_metrics
+from shop.serializers import *
 from cart.forms import CartAddProductForm
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -22,12 +24,14 @@ from users.views import *
 
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from rest_framework import genericsX
 
 
 
 # Create your views here.
 def main_page(request):
     products = Products.objects.all()
+    update_metrics()
     return render(request, 'shop/main_page.html', {'products': products})
 
 def about_shop(request):
@@ -59,7 +63,6 @@ def checkout(request):
                 postcode=form.cleaned_data['postcode']
             )
 
-            # Get or create the status instance for "В обработке"
             status_instance, created = Status.objects.get_or_create(name_status="В обработке")
 
             ordered_items = []
@@ -69,7 +72,7 @@ def checkout(request):
                     products=item['product'],
                     quantity_products=item['quantity'],
                     unit_price=item['price'],
-                    status=status_instance  # Assign the status instance
+                    status=status_instance 
                 )
                 ordered_items.append({
                     'product': item['product'],
@@ -77,7 +80,6 @@ def checkout(request):
                     'price': item['price'],
                 })
 
-            # Get or create the PaymentMethod instance based on form data
             payment_method_instance, created = PaymentMethod.objects.get_or_create(
                 payment_method=form.cleaned_data['payment_method']
             )
@@ -86,7 +88,7 @@ def checkout(request):
                 order=order,
                 date_payment=timezone.now(),
                 sum_payment=cart.get_total_price(),
-                payment_method=payment_method_instance  # Assign the PaymentMethod instance
+                payment_method=payment_method_instance
             )
 
             email_subject = "Ваш заказ успешно оформлен!"
@@ -123,7 +125,9 @@ def order_confirmation(request):
 def catalog(request):
     products = Products.objects.all()
     categories = Category.objects.all()
+    update_metrics()
     return render(request, 'shop/buyer/Catalog.html', {'products': products, 'categories': categories})
+    
 
 def category_view(request, category_id):
     categories = Category.objects.all()
@@ -183,7 +187,7 @@ class RolesDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pk'] = self.kwargs['pk']  # Передаем pk в контекст
+        context['pk'] = self.kwargs['pk']
         context['role'] = get_object_or_404(Roles, pk=self.kwargs['pk'])
         return context
 
@@ -295,7 +299,7 @@ class CountryDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pk'] = self.kwargs['pk']  # Передаем pk в контекст
+        context['pk'] = self.kwargs['pk']
         context['country'] = get_object_or_404(Country, pk=self.kwargs['pk'])
         return context
     
@@ -356,7 +360,7 @@ class BrendsDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pk'] = self.kwargs['pk']  # Передаем pk в контекст
+        context['pk'] = self.kwargs['pk']
         context['brand'] = get_object_or_404(Brends, pk=self.kwargs['pk'])
         return context
     
@@ -418,7 +422,7 @@ class CategoryDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pk'] = self.kwargs['pk']  # Передаем pk в контекст
+        context['pk'] = self.kwargs['pk']
         context['category'] = get_object_or_404(Category, pk=self.kwargs['pk'])
         return context
     
@@ -504,7 +508,7 @@ class AddressDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pk'] = self.kwargs['pk']  # Передаем pk в контекст
+        context['pk'] = self.kwargs['pk']
         context['address'] = get_object_or_404(DeliveryAddress, pk=self.kwargs['pk'])
         return context
     
@@ -553,7 +557,7 @@ class RolesUserDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pk'] = self.kwargs['pk']  # Передаем pk в контекст
+        context['pk'] = self.kwargs['pk']
         context['RolesUser'] = get_object_or_404(UserRoles, pk=self.kwargs['pk'])
         return context
     
@@ -603,7 +607,7 @@ class UserDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pk'] = self.kwargs['pk']  # Передаем pk в контекст
+        context['pk'] = self.kwargs['pk']
         context['User'] = get_object_or_404(User, pk=self.kwargs['pk'])
         return context
     
@@ -753,22 +757,16 @@ class OrderDetailsDeleteView(DeleteView):
         return context
     
 def export_payments_to_excel(request):
-    import openpyxl
-    from django.http import HttpResponse
-    from .models import Payment
 
-    # Создаем книгу и активный лист
     workbook = openpyxl.Workbook()
     sheet = workbook.active
     sheet.title = "Платежи"
 
-    # Заголовки
     headers = ['ID платежа', 'ID заказа', 'Пользователь', 'Имя', 'Фамилия', 'Дата оплаты', 'Сумма', 'Метод оплаты']
     sheet.append(headers)
 
-    # Данные
     payments = Payment.objects.select_related('order', 'payment_method').all()
-    total_sum = 0  # Для подсчета общей суммы
+    total_sum = 0
 
     for payment in payments:
         sum_payment = float(payment.sum_payment)
@@ -784,11 +782,9 @@ def export_payments_to_excel(request):
             payment.payment_method.payment_method if payment.payment_method else None,
         ])
 
-    # Добавляем строку с общей суммой
-    sheet.append([])  # Пустая строка для разделения
+    sheet.append([])
     sheet.append(['', '', '', '', '', 'Общая сумма:', total_sum, 'руб.'])
 
-    # Настройка ответа
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     )
@@ -912,7 +908,7 @@ class StatusDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pk'] = self.kwargs['pk']  # Передаем pk в контекст
+        context['pk'] = self.kwargs['pk']
         context['Status'] = get_object_or_404(Status, pk=self.kwargs['pk'])
         return context
     
@@ -961,6 +957,512 @@ class PaymentMethodDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pk'] = self.kwargs['pk']  # Передаем pk в контекст
+        context['pk'] = self.kwargs['pk']
         context['PaymentMethod'] = get_object_or_404(PaymentMethod, pk=self.kwargs['pk'])
         return context
+    
+@api_view(['GET', 'POST'])
+def products_api(request):
+    if request.method == 'GET':
+        list_data = Products.objects.filter()
+        serializer = serializer_Products(list_data, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = serializer_Products(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def products_api_detail(request, pk=None):
+    one_data = get_object_or_404(Products, pk=pk)
+    if request.method == 'GET':
+        serializer = serializer_Products(one_data)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = serializer_Products(one_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        one_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class ProductList(generics.ListCreateAPIView):
+    queryset = Products.objects.all()
+    serializer_class = serializer_Products
+
+class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Products.objects.all()
+    serializer_class = serializer_Products
+
+@api_view(['GET', 'POST'])
+def category_api(request):
+    if request.method == 'GET':
+        list_data = Category.objects.filter()
+        serializer = serializer_Category(list_data, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = serializer_Category(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def category_api_detail(request, pk=None):
+    one_data = get_object_or_404(Category, pk=pk)
+    if request.method == 'GET':
+        serializer = serializer_Category(one_data)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = serializer_Category(one_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        one_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class CategoryList(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = serializer_Category
+
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = serializer_Category
+
+@api_view(['GET', 'POST'])
+def brend_api(request):
+    if request.method == 'GET':
+        list_data = Brends.objects.filter()
+        serializer = serializer_Brends(list_data, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = serializer_Brends(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def brend_api_detail(request, pk=None):
+    one_data = get_object_or_404(Brends, pk=pk)
+    if request.method == 'GET':
+        serializer = serializer_Brends(one_data)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = serializer_Brends(one_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        one_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class BrendsList(generics.ListCreateAPIView):
+    queryset = Brends.objects.all()
+    serializer_class = serializer_Brends
+
+class BrendsDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Brends.objects.all()
+    serializer_class = serializer_Brends
+
+
+@api_view(['GET', 'POST'])
+def deliveryAddress_api(request):
+    if request.method == 'GET':
+        list_data = DeliveryAddress.objects.filter()
+        serializer = serializer_DeliveryAddress(list_data, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = serializer_DeliveryAddress(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def deliveryAddress_api_detail(request, pk=None):
+    one_data = get_object_or_404(DeliveryAddress, pk=pk)
+    if request.method == 'GET':
+        serializer = serializer_DeliveryAddress(one_data)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = serializer_DeliveryAddress(one_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        one_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class DeliveryAddressList(generics.ListCreateAPIView):
+    queryset = DeliveryAddress.objects.all()
+    serializer_class = serializer_DeliveryAddress
+
+class DeliveryAddressDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = DeliveryAddress.objects.all()
+    serializer_class = serializer_DeliveryAddress
+
+@api_view(['GET', 'POST'])
+def payment_api(request):
+    if request.method == 'GET':
+        list_data = Payment.objects.filter()
+        serializer = serializer_Payment(list_data, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = serializer_Payment(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def payment_api_detail(request, pk=None):
+    one_data = get_object_or_404(Payment, pk=pk)
+    if request.method == 'GET':
+        serializer = serializer_Payment(one_data)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = serializer_Payment(one_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        one_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class PaymentList(generics.ListCreateAPIView):
+    queryset = Payment.objects.all()
+    serializer_class = serializer_Payment
+
+class PaymentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Payment.objects.all()
+    serializer_class = serializer_Payment
+
+
+@api_view(['GET', 'POST'])
+def country_api(request):
+    if request.method == 'GET':
+        list_data = Country.objects.filter()
+        serializer = serializer_Country(list_data, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = serializer_Country(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def country_api_detail(request, pk=None):
+    one_data = get_object_or_404(Country, pk=pk)
+    if request.method == 'GET':
+        serializer = serializer_Country(one_data)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = serializer_Country(one_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        one_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class CountryList(generics.ListCreateAPIView):
+    queryset = Country.objects.all()
+    serializer_class = serializer_Country
+
+class CountryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Country.objects.all()
+    serializer_class = serializer_Country
+
+
+@api_view(['GET', 'POST'])
+def status_api(request):
+    if request.method == 'GET':
+        list_data = Status.objects.filter()
+        serializer = serializer_Status(list_data, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = serializer_Status(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def status_api_detail(request, pk=None):
+    one_data = get_object_or_404(Status, pk=pk)
+    if request.method == 'GET':
+        serializer = serializer_Status(one_data)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = serializer_Status(one_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        one_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class StatusList(generics.ListCreateAPIView):
+    queryset = Status.objects.all()
+    serializer_class = serializer_Status
+
+class StatusDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Status.objects.all()
+    serializer_class = serializer_Status
+    
+
+@api_view(['GET', 'POST'])
+def PaymentMethod_api(request):
+    if request.method == 'GET':
+        list_data = PaymentMethod.objects.filter()
+        serializer = serializer_PaymentMethod(list_data, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = serializer_PaymentMethod(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def PaymentMethod_api_detail(request, pk=None):
+    one_data = get_object_or_404(PaymentMethod, pk=pk)
+    if request.method == 'GET':
+        serializer = serializer_PaymentMethod(one_data)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = serializer_PaymentMethod(one_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        one_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class PaymentMethodList(generics.ListCreateAPIView):
+    queryset = PaymentMethod.objects.all()
+    serializer_class = serializer_PaymentMethod
+
+class PaymentMethodDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = PaymentMethod.objects.all()
+    serializer_class = serializer_PaymentMethod
+
+
+
+@api_view(['GET', 'POST'])
+def orderDetails_api(request):
+    if request.method == 'GET':
+        list_data = OrderDetails.objects.filter()
+        serializer = serializer_orderDetails(list_data, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = serializer_orderDetails(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def orderDetails_api_detail(request, pk=None):
+    one_data = get_object_or_404(OrderDetails, pk=pk)
+    if request.method == 'GET':
+        serializer = serializer_orderDetails(one_data)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = serializer_orderDetails(one_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        one_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class OrderDetailsList(generics.ListCreateAPIView):
+    queryset = OrderDetails.objects.all()
+    serializer_class = serializer_orderDetails
+
+class OrderDetailsDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = OrderDetails.objects.all()
+    serializer_class = serializer_orderDetails
+
+@api_view(['GET', 'POST'])
+def orders_api(request):
+    if request.method == 'GET':
+        list_data = Orders.objects.filter()
+        serializer = serializer_orders(list_data, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = serializer_orders(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def orders_api_detail(request, pk=None):
+    one_data = get_object_or_404(Orders, pk=pk)
+    if request.method == 'GET':
+        serializer = serializer_orders(one_data)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = serializer_orders(one_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        one_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class OrdersList(generics.ListCreateAPIView):
+    queryset = Orders.objects.all()
+    serializer_class = serializer_orders
+
+class OrdersDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Orders.objects.all()
+    serializer_class = serializer_orders
+
+
+@api_view(['GET', 'POST'])
+def authUser_api(request):
+    if request.method == 'GET':
+        list_data = AuthUser.objects.filter()
+        serializer = serializer_authUser(list_data, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = serializer_authUser(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def authUser_api_detail(request, pk=None):
+    one_data = get_object_or_404(AuthUser, pk=pk)
+    if request.method == 'GET':
+        serializer = serializer_authUser(one_data)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = serializer_authUser(one_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        one_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class AuthUserList(generics.ListCreateAPIView):
+    queryset = AuthUser.objects.all()
+    serializer_class = serializer_authUser
+
+class AuthUserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = AuthUser.objects.all()
+    serializer_class = serializer_authUser
+
+
+@api_view(['GET', 'POST'])
+def roles_api(request):
+    if request.method == 'GET':
+        list_data = Roles.objects.filter()
+        serializer = serializer_roles(list_data, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = serializer_roles(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def roles_api_detail(request, pk=None):
+    one_data = get_object_or_404(Roles, pk=pk)
+    if request.method == 'GET':
+        serializer = serializer_roles(one_data)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = serializer_roles(one_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        one_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class RolesList(generics.ListCreateAPIView):
+    queryset = Roles.objects.all()
+    serializer_class = serializer_roles
+
+class RolesDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Roles.objects.all()
+    serializer_class = serializer_roles
+
+
+@api_view(['GET', 'POST'])
+def userRoles_api(request):
+    if request.method == 'GET':
+        list_data = UserRoles.objects.filter()
+        serializer = serializer_userRoles(list_data, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = serializer_userRoles(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def userRoles_api_detail(request, pk=None):
+    one_data = get_object_or_404(UserRoles, pk=pk)
+    if request.method == 'GET':
+        serializer = serializer_userRoles(one_data)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = serializer_userRoles(one_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        one_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class UserRolesList(generics.ListCreateAPIView):
+    queryset = UserRoles.objects.all()
+    serializer_class = serializer_userRoles
+
+class UserRolesDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UserRoles.objects.all()
+    serializer_class = serializer_userRoles
+
+def api_page(request):
+    return render(request, 'shop/manager/API.html')

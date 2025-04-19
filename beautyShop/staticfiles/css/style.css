@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
 *,
 *::after,
@@ -43,13 +42,10 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  /* Центрирует все внутренние элементы */
   width: 100%;
-  /* Для полного выравнивания */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* Центрирует элементы по горизонтали */ }
+  align-items: center; }
 
 .menu-icon {
   position: fixed;
@@ -103,7 +99,6 @@ body {
   position: relative;
   margin: 0 auto; }
 
-/* Стили для кнопки */
 .theme-btn {
   display: inline-block;
   background: #fff;
@@ -147,7 +142,6 @@ body {
   animation: moveInBottom .5s ease-out .75s;
   animation-fill-mode: backwards; }
 
-/* Trying some cool stuff :p */
 .theme-btn {
   background: #fff;
   padding: 1.5rem 4rem;

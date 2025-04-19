@@ -48,24 +48,24 @@ position: fixed;
 .table {
   width: 80%;
   margin: 0 auto;
-  position: absolute;  /* Абсолютное позиционирование таблицы */
-  top: 20%;  /* Указываем, чтобы таблица находилась в верхней части */
+  position: absolute;
+  top: 20%;
   left: 50%;
-  transform: translateX(-50%);  /* Центрируем таблицу */
+  transform: translateX(-50%);
 }
 
 .form-wrapper {
   margin: 0 auto;
-  position: absolute;  /* Абсолютное позиционирование таблицы */
-  top: 50%;  /* Указываем, чтобы таблица находилась в верхней части */
+  position: absolute;
+  top: 50%;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .form-wrapper1 {
   margin: 0 auto;
-  position: absolute;  /* Абсолютное позиционирование таблицы */
-  top: 40%;  /* Указываем, чтобы таблица находилась в верхней части */
+  position: absolute;
+  top: 40%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -77,8 +77,8 @@ position: fixed;
   padding-left: 25px;
   padding-right: 25px;
   margin-bottom: 20px;
-  position: absolute;  /* Абсолютное позиционирование таблицы */
-  top: 10%;  /* Указываем, чтобы таблица находилась в верхней части */
+  position: absolute; 
+  top: 10%;  
   left: 50%;
   transform: translateX(-50%);
   font-size: 16px;
@@ -100,8 +100,8 @@ position: fixed;
   padding-bottom: 5px;
   padding-left: 25px;
   padding-right: 25px;
-  position: absolute;  /* Абсолютное позиционирование таблицы */
-  top: 10%;  /* Указываем, чтобы таблица находилась в верхней части */
+  position: absolute; 
+  top: 10%;
   left: 10%;
   transform: translateX(-50%);
   font-size: 16px;
@@ -130,19 +130,19 @@ position: fixed;
 }
 .up_del_but {
   display: flex;
-  justify-content: space-between; /* Распределяем кнопки по сторонам */
-  gap: 1rem; /* Добавляем расстояние между кнопками */
+  justify-content: space-between;
+  gap: 1rem;
   margin-top: 1rem;
 }
 
 .up_del_but a {
   background-color: #ffc5e0;
-  padding: 5px 10px;  /* Увеличил паддинг для кнопок */
+  padding: 5px 10px;
   font-size: 12px;
   text-decoration: none;
   border-radius: 10px;
   text-align: center;
-  flex: 1; /* Кнопки будут одинакового размера */
+  flex: 1;
 }
 
 .up_del_but a:hover {
@@ -150,7 +150,7 @@ position: fixed;
 }
 
 .up_del_but p {
-  margin: 0; /* Убираем отступы для текста внутри кнопок */
+  margin: 0;
   color: #1b0a12;
 }
 
@@ -215,8 +215,6 @@ button {
 }
 
 
-/* Trying some cool stuff :p */
-// Mixin example
 @mixin button-style($color)  {
   background:$color;
   padding:1.5rem 4rem;
@@ -230,7 +228,6 @@ button {
   backface-visibility:hidden;
 }
 
-// Extend example
 %feature-content-styles {
   color: #fff;
   display:block;
@@ -366,4 +363,3 @@ button {
   height: 45px;
   filter: invert(18%) sepia(77%) saturate(1948%) hue-rotate(273deg) brightness(89%) contrast(88%);
 }
-

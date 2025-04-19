@@ -19,7 +19,6 @@ import logging
 
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -32,7 +31,7 @@ SECRET_KEY = 'django-insecure-cki7xcewu&&7#df1gaqh-)ub#6antmw1#)+x7irjnswo2%g($+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -44,11 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sass_processor',
+    'django_extensions',
     'shop',
     'rest_framework',
     'django_admin_logs',
     'users',
-    'cart'
+    'django_cryptography',
+    'cart',
+    'django_prometheus'
 ]
 
 STATICFILES_FINDERS = [
@@ -60,6 +62,7 @@ STATICFILES_FINDERS = [
 SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -67,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
 
